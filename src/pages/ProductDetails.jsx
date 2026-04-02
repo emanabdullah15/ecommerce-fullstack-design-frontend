@@ -8,21 +8,22 @@ const ProductDetails = () => {
   const [product, setProduct] = useState(null);
   const [relatedProducts, setRelatedProducts] = useState([]);
   const [mayLike, setMayLike] = useState([]);
+  const API_BASE = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const { data } = await axios.get(`http://localhost:5000/api/products/${id}`);
+        const { data } = await axios.get(`${API_BASE}/api/products/${id}`);
         setProduct(data);
 
         // Related products: same category excluding current
         const { data: related } = await axios.get(
-          `http://localhost:5000/api/products?category=${data.category}`
+          `${API_BASE}/api/products?category=${data.category}`
         );
         setRelatedProducts(related.filter((p) => p._id !== data._id).slice(0, 6));
 
         // "You may like": any 3 different products
-        const { data: allProducts } = await axios.get(`http://localhost:5000/api/products`);
+        const { data: allProducts } = await axios.get(`${API_BASE}/api/products`);
         setMayLike(allProducts.filter((p) => p._id !== data._id).slice(0, 3));
       } catch (err) {
         console.error(err);
@@ -33,7 +34,7 @@ const ProductDetails = () => {
 
   const addToCart = async () => {
     try {
-      await axios.post("http://localhost:5000/api/cart", {
+      await axios.post("${API_BASE}/api/cart", {
         productId: product._id,
         name: product.name,
         price: product.price,

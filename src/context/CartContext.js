@@ -6,10 +6,11 @@ export const CartContext = createContext();
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
   const [cartCount, setCartCount] = useState(0);
+  const API_BASE = process.env.REACT_APP_API_URL;
 
   const fetchCart = async () => {
     try {
-      const { data } = await axios.get("http://localhost:5000/api/cart");
+      const { data } = await axios.get("${API_BASE}/api/cart");
       setCartItems(data);
       setCartCount(data.reduce((acc, item) => acc + item.qty, 0));
     } catch (err) {
@@ -19,7 +20,7 @@ export const CartProvider = ({ children }) => {
 
   const removeItem = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/cart/${id}`);
+      await axios.delete(`${API_BASE}/api/cart/${id}`);
       fetchCart();
     } catch (err) {
       console.error(err);
@@ -28,7 +29,7 @@ export const CartProvider = ({ children }) => {
 
   const removeAll = async () => {
     try {
-      await axios.delete(`http://localhost:5000/api/cart`);
+      await axios.delete(`${API_BASE}/api/cart`);
       fetchCart();
     } catch (err) {
       console.error(err);
@@ -37,7 +38,7 @@ export const CartProvider = ({ children }) => {
 
   const updateQty = async (id, qty) => {
     try {
-      await axios.put(`http://localhost:5000/api/cart/${id}`, { qty });
+      await axios.put(`${API_BASE}/api/cart/${id}`, { qty });
       fetchCart();
     } catch (err) {
       console.error(err);
@@ -66,7 +67,9 @@ export const CartProvider = ({ children }) => {
         status: "pending",
       };
 
-      const res = await axios.post("http://localhost:5000/api/orders", orderData);
+      
+
+      const res = await axios.post("${API_BASE}/api/orders", orderData);
       alert(res.data.message || "Order placed successfully!");
       await removeAll();
     } catch (err) {
