@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/static/css/main.b53d92ce.css",
+    "main.js": "/static/js/main.66aac06f.js",
+    "static/js/453.942741f1.chunk.js": "/static/js/453.942741f1.chunk.js",
+    "static/media/image 102.png": "/static/media/image 102.cb4ebc4ef0e36fff80d4.png",
+    "static/media/Mask group.png": "/static/media/Mask group.243d5adab76c4a975e09.png",
+    "static/media/home-bg.png": "/static/media/home-bg.b4ad11b48774b1593551.png",
+    "static/media/image 104.png": "/static/media/image 104.d9870a684bce165a65ec.png",
+    "static/media/image 107.png": "/static/media/image 107.63a096c78f30224110eb.png",
+    "static/media/image 108.png": "/static/media/image 108.8daa6630b1768bb94403.png",
+    "static/media/image 106.png": "/static/media/image 106.5f7682237924b5cd1d56.png",
+    "static/media/electronics.png": "/static/media/electronics.d49d77d3f0a6358c79b2.png",
+    "static/media/logo-colored.svg": "/static/media/logo-colored.697d97d33f7c03caabf37b583c1d464b.svg",
+    "index.html": "/index.html",
+    "main.b53d92ce.css.map": "/static/css/main.b53d92ce.css.map",
+    "main.66aac06f.js.map": "/static/js/main.66aac06f.js.map",
+    "453.942741f1.chunk.js.map": "/static/js/453.942741f1.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b53d92ce.css",
+    "static/js/main.66aac06f.js"
+  ]
+}
