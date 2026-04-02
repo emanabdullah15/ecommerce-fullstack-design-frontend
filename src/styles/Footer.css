@@ -1,0 +1,164 @@
+/* ================= NEWSLETTER ================= */
+.newsletter-section {
+  background: #f5f7fa;
+  padding: 60px 0;
+  text-align: center;
+}
+
+.newsletter-section h5 {
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.newsletter-section p {
+  color: gray;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+/* INPUT + BUTTON */
+.newsletter-box {
+  display: flex;
+  justify-content: center;
+  max-width: 420px;
+  margin: auto;
+}
+
+.newsletter-box input {
+  border-radius: 4px 0 0 4px;
+  border-right: none;
+}
+
+.newsletter-box button {
+  border-radius: 0 4px 4px 0;
+}
+
+/* ================= FOOTER ================= */
+.footer-section {
+  background: #fff;
+}
+
+/* TOP */
+.footer-top {
+  padding: 50px 0;
+  border-bottom: 1px solid #eee;
+}
+
+/* LOGO */
+.logo-img {
+  width: 120px;
+  margin-bottom: 10px;
+}
+
+/* DESCRIPTION */
+.desc {
+  font-size: 13px;
+  color: gray;
+}
+
+/* SOCIAL ICONS */
+.social-icons i {
+  font-size: 16px;
+  margin-right: 10px;
+  color: gray;
+  cursor: pointer;
+}
+
+.social-icons i:hover {
+  color: #0d6efd;
+}
+
+.social-icons img {
+  width: 20px;
+  margin-right: 12px;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: 0.3s;
+}
+
+.social-icons img:hover {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+/* LINKS */
+.footer-top h6 {
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.footer-top ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-top ul li {
+  font-size: 13px;
+  color: gray;
+  margin-bottom: 6px;
+  cursor: pointer;
+}
+
+.footer-top ul li:hover {
+  color: #000;
+}
+
+/* APP IMAGES */
+.app-img {
+  width: 120px;
+  cursor: pointer;
+}
+
+/* BOTTOM */
+.footer-bottom {
+  background: #f5f7fa;
+  padding: 15px 0;
+  font-size: 13px;
+  color: gray;
+}
+
+/* DROPDOWN */
+.lang-dropdown {
+  position: relative;
+  cursor: pointer;
+}
+
+.selected-lang {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  /* background: #fff; */
+  padding: 5px 10px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+}
+
+.selected-lang i {
+  font-size: 12px;
+}
+
+/* DROPDOWN MENU */
+.dropdown-menu-custom {
+  position: absolute;
+  right: 0;
+  top: 35px;
+  background: #fff;
+  border: 1px solid #ddd;
+  width: 180px;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+}
+
+/* ITEM */
+.dropdown-item-custom {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  font-size: 13px;
+}
+
+.dropdown-item-custom:hover {
+  background: #f5f7fa;
+}

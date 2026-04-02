@@ -1,0 +1,161 @@
+/* Sidebar container */
+.profile-sidebar {
+  position: fixed;
+  top: 0;
+  right: -320px; /* Hidden by default */
+  width: 320px;
+  height: 100%;
+  background-color: #fff;
+  box-shadow: -2px 0 10px rgba(0,0,0,0.2);
+  transition: right 0.3s ease;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.profile-sidebar.open {
+  right: 0;
+}
+
+/* Overlay */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.4);
+  z-index: 999;
+}
+
+/* Header */
+.profile-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.avatar {
+  width: 50px;
+  height: 50px;
+  background-color: #eee;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+
+/* Logout button */
+.logout-btn {
+  padding: 6px 12px;
+  margin-top: 5px;
+  border: none;
+  background-color: #ff4d4f;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+/* Menu */
+.profile-menu {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+  flex: 1;
+}
+
+.profile-menu li {
+  margin-bottom: 15px;
+  cursor: pointer;
+}
+
+/* Footer */
+.profile-footer p {
+  font-size: 12px;
+  color: #888;
+  margin-bottom: 5px;
+}
+
+/* AuthForms inside sidebar */
+.auth-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 5px 0;
+}
+
+.auth-container input {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.auth-container button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+}
+
+.auth-container button:hover {
+  background-color: #0056b3;
+}
+
+.toggle-auth {
+  font-size: 12px;
+  color: #007bff;
+  text-align: center;
+  margin-top: 6px;
+  cursor: pointer;
+}
+
+.toggle-auth:hover {
+  color: #0056b3;
+}
+
+/* Close icon */
+.close-btn {
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* Sign in | Register links in sidebar */
+.profile-sidebar .auth-links {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #333; /* matches sidebar text color */
+}
+
+.profile-sidebar .auth-links a {
+  color: #007bff; /* blue link color */
+  text-decoration: none;
+  margin: 0 5px;
+  transition: color 0.2s;
+}
+
+.profile-sidebar .auth-links a:hover {
+  color: #0056b3; /* darker blue on hover */
+  text-decoration: underline;
+}
+/* Responsive */
+@media (max-width: 768px) {
+  .profile-sidebar {
+    width: 80%;
+  }
+}

@@ -1,0 +1,20 @@
+.sidebar {
+  font-size: 14px;
+}
+
+.sidebar h6 {
+  margin-bottom: 10px;
+}
+
+.sidebar-list li {
+  margin-bottom: 6px;
+  cursor: pointer;
+}
+
+.sidebar-list li:hover {
+  color: #0d6efd;
+}
+
+.form-check {
+  margin-bottom: 6px;
+}

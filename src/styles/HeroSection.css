@@ -1,0 +1,162 @@
+/* ================= OUTER BOX ================= */
+.hero-container {
+  margin: 26px;
+  padding: 15px;
+  border-radius: 10px;
+  background: white;
+  border: 1px solid rgb(224, 221, 221);
+}
+
+/* ================= GRID (DESKTOP) ================= */
+.hero-grid {
+  display: grid;
+  grid-template-columns: 220px 1fr 260px;
+  gap: 15px;
+}
+
+/* ================= LEFT MENU ================= */
+.left-menu {
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.left-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.left-menu li {
+  padding: 10px;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.left-menu li:hover {
+  background: #f1f5f9;
+}
+
+.left-menu li.active {
+  background: #cbd5e1;
+  font-weight: 600;
+}
+
+/* ================= BANNER ================= */
+.banner {
+  background-image: url("../assets/icons/Mask group.png");
+  background-size: cover;
+  background-position: right;
+  border-radius: 10px;
+  height: 420px;
+  display: flex;
+  align-items: center;
+  padding-left: 40px;
+}
+
+/* TEXT */
+.banner-text p {
+  font-size: 26px;
+  color: #333;
+}
+
+.banner-text h2 {
+  font-size: 28px;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.learn-btn {
+  border-radius: 8px;
+}
+
+/* ================= RIGHT SIDE ================= */
+.right-side {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* USER BOX */
+.user-box {
+  background: #dbeafe;
+  padding: 15px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+/* OFFER BOX */
+.offer-box {
+  background: #f5822a;
+  color: white;
+  padding: 25px;
+  border-radius: 10px;
+  font-size: 18px;
+}
+
+/* QUOTE BOX */
+.quote-box {
+  background: #5bbec4;
+  color: white;
+  padding: 25px;
+  border-radius: 10px;
+  font-size: 18px;
+}
+
+/* ================= TABLET ================= */
+@media (max-width: 992px) {
+
+  .hero-grid {
+    grid-template-columns: 180px 1fr;
+  }
+
+  .right-side {
+    display: none;
+  }
+}
+
+/* ================= MOBILE (EXACT UI) ================= */
+@media (max-width: 768px) {
+
+  .hero-container {
+    margin: 10px;
+    padding: 10px;
+    border: none;
+  }
+
+  /* STACK */
+  .hero-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* HIDE LEFT + RIGHT */
+  .left-menu {
+    display: none;
+  }
+
+  .right-side {
+    display: none;
+  }
+
+  /* MOBILE BANNER */
+  .banner {
+    height: 180px;
+    padding: 20px;
+    align-items: flex-start;
+    border-radius: 12px;
+  }
+
+  .banner-text p {
+    font-size: 16px;
+  }
+
+  .banner-text h2 {
+    font-size: 20px;
+  }
+
+  .learn-btn {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+}

@@ -1,0 +1,100 @@
+.inquiry-section {
+  position: relative;
+}
+
+/* BACKGROUND */
+.inquiry-bg {
+  background: url("../assets/images/bg-cards/image 102.png") no-repeat center;
+  background-size: cover;
+  position: relative;
+  padding: 60px 0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* BLUE OVERLAY */
+.inquiry-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 102, 255, 0.75);
+}
+
+/* CONTENT */
+.inquiry-content {
+  position: relative;
+  z-index: 2;
+}
+
+/* TEXT */
+.inquiry-text h4 {
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.inquiry-text p {
+  max-width: 400px;
+  font-size: 14px;
+}
+
+/* FORM */
+.form-box {
+  background: #fff;
+  padding: 20px;
+  border-radius: 6px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+.form-box textarea {
+  height: 80px;
+  resize: none;
+}
+
+/* MOBILE BUTTON (hidden on desktop) */
+.mobile-btn {
+  display: none;
+  margin-top: 15px;
+}
+
+/* ================= MOBILE DESIGN ================= */
+@media (max-width: 768px) {
+
+  .inquiry-section {
+    padding: 0 10px;
+  }
+
+  .inquiry-bg {
+    padding: 30px 20px;
+    border-radius: 12px;
+    text-align: left;
+  }
+
+  /* Hide form on mobile */
+  .form-wrapper {
+    display: none;
+  }
+
+  /* Text center-like layout */
+  .inquiry-text {
+    text-align: left;
+  }
+
+  .inquiry-text h4 {
+    font-size: 18px;
+    line-height: 1.4;
+  }
+
+  .inquiry-text p {
+    font-size: 13px;
+  }
+
+  /* Show button */
+  .mobile-btn {
+    display: inline-block;
+    background: #fff;
+    color: #0d6efd;
+    font-weight: 500;
+    border-radius: 6px;
+    padding: 8px 16px;
+  }
+}

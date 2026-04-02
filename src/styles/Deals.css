@@ -1,0 +1,159 @@
+/* ================= OUTER ================= */
+.deals-wrapper {
+  padding: 0 10px;
+  margin: 24px;
+}
+
+/* BOX */
+.deals-box {
+  background: #ffffff;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid rgb(224, 221, 221);
+}
+
+/* ================= DESKTOP GRID ================= */
+.deals-grid {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  align-items: center;
+}
+
+/* LEFT SIDE */
+.deals-left {
+  padding: 20px;
+}
+
+.deals-left h5 {
+  font-weight: 600;
+}
+
+.sub-text {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+/* TIMER */
+.timer {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.timer div {
+  background: #374151;
+  color: #fff;
+  padding: 8px 10px;
+  border-radius: 6px;
+  text-align: center;
+  min-width: 50px;
+}
+
+.timer span {
+  display: block;
+  font-weight: bold;
+}
+
+.timer small {
+  font-size: 10px;
+}
+
+/* ================= PRODUCTS ================= */
+.deals-products {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  border-left: 1px solid #e5e7eb;
+}
+
+/* CARD */
+.product-card {
+  text-align: center;
+  padding: 15px;
+  border-right: 1px solid #e5e7eb;
+  background: #fff;
+  transition: 0.3s;
+}
+
+.product-card:hover {
+  background: #f9fafb;
+}
+
+.product-card img {
+  height: 80px;
+  object-fit: contain;
+  margin-bottom: 10px;
+}
+
+.product-card p {
+  font-size: 13px;
+  margin-bottom: 6px;
+}
+
+/* DISCOUNT */
+.discount {
+  display: inline-block;
+  background: #ffe4e6;
+  color: #e11d48;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+}
+
+/* ================= TABLET ================= */
+@media (max-width: 992px) {
+  .deals-products {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ================= MOBILE (EXACT UI 🔥) ================= */
+@media (max-width: 768px) {
+
+  .deals-wrapper {
+    margin: 10px;
+  }
+
+  .deals-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* LEFT compact */
+  .deals-left {
+    padding: 10px;
+  }
+
+  .timer {
+    justify-content: flex-start;
+  }
+
+  /* HORIZONTAL SCROLL */
+  .deals-products {
+    display: flex;
+    overflow-x: auto;
+    border-left: none;
+    padding: 10px;
+    gap: 10px;
+  }
+
+  /* CARD SMALL */
+  .product-card {
+    min-width: 120px;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    border-right: none;
+    padding: 10px;
+  }
+
+  .product-card img {
+    height: 60px;
+  }
+
+  .product-card p {
+    font-size: 12px;
+  }
+
+  .discount {
+    font-size: 11px;
+    padding: 3px 8px;
+  }
+}

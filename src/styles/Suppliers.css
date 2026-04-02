@@ -1,0 +1,47 @@
+/* .regions-section {
+  background: #f5f7fa;
+} */
+
+/* GRID */
+.regions-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+}
+
+/* ITEM */
+.region-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #fff;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #eee;
+  transition: 0.3s;
+}
+
+/* TEXT */
+.region-text h6 {
+  font-size: 14px;
+  margin: 0;
+}
+
+.region-text p {
+  font-size: 12px;
+  color: gray;
+  margin: 0;
+}
+
+/* HOVER */
+.region-item:hover {
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  transform: translateY(-2px);
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .regions-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

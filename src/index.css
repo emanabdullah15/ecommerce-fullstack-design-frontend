@@ -1,0 +1,26 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+}
+
+.container {
+  width: 95%;
+  margin: auto;
+}
+
+.flex {
+  display: flex;
+}
+
+.grid {
+  display: grid;
+}
+
+.btn {
+  background-color: #ff6f61;
+  color: white;
+  padding: 8px;
+  border: none;
+  cursor: pointer;
+}

@@ -1,0 +1,142 @@
+/* MAIN CONTAINER */
+.main-box {
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 6px;
+  overflow: hidden;
+  display: flex;
+}
+
+/* LEFT SIDE */
+.left-banner {
+  width: 25%;
+  background: url("../assets/images/interior/home-bg.png") no-repeat center;
+  background-size: cover;
+  padding: 20px;
+  display: flex;
+  align-items: flex-start;
+}
+.left-ban {
+  width: 25%;
+  background: url("../assets/images/tech/electronics.png") no-repeat center;
+  background-size: cover;
+  padding: 20px;
+  display: flex;
+  align-items: flex-start;
+}
+
+.banner-content {
+  max-width: 140px;
+}
+
+.banner-content h5 {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.banner-content button {
+  background: #fff;
+  border: none;
+  padding: 6px 12px;
+  font-size: 13px;
+  margin-top: 10px;
+}
+
+/* RIGHT GRID (DESKTOP) */
+.right-grid {
+  width: 75%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+/* PRODUCT BOX */
+.product-box {
+  border-left: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+  padding: 12px;
+  height: 140px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* IMAGE */
+.product-box img {
+  width: 100%;
+  height: 70px;
+  object-fit: contain;
+}
+
+/* TEXT */
+.title {
+  font-size: 13px;
+  margin: 4px 0;
+}
+
+.price {
+  font-size: 12px;
+  color: #8b8b8b;
+}
+
+/* BORDER FIX */
+.product-box:nth-child(4n) {
+  border-right: none;
+}
+
+.product-box:nth-last-child(-n + 4) {
+  border-bottom: none;
+}
+
+/* ================= MOBILE DESIGN ================= */
+@media (max-width: 768px) {
+
+  .main-box {
+    flex-direction: column;
+    border: none;
+  }
+
+  /* Banner full width */
+  .left-banner {
+    width: 100%;
+    height: 160px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+  }
+
+  /* Horizontal scroll (LIKE IMAGE) */
+  .right-grid {
+    width: 100%;
+    display: flex;
+    overflow-x: auto;
+    gap: 10px;
+    padding: 5px;
+  }
+
+  /* Hide scrollbar */
+  .right-grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Card style */
+  .product-box {
+    min-width: 130px;
+    height: 150px;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    background: #fff;
+    flex-shrink: 0;
+  }
+
+  .product-box img {
+    height: 60px;
+  }
+
+  .title {
+    font-size: 12px;
+  }
+
+  .price {
+    font-size: 11px;
+  }
+}

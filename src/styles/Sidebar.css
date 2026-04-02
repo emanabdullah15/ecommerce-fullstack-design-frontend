@@ -1,0 +1,48 @@
+.sidebar {
+  width: 260px;
+  /* background: white; */
+  border-radius: 10px;
+  padding: 15px;
+}
+
+.filter-section {
+  border-bottom: 1px solid #e5e7eb;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+}
+
+.filter-section h4 {
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.filter-section p, .filter-section label {
+  font-size: 13px;
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+
+.see-all {
+  color: #2563eb;
+}
+
+.price-inputs {
+  display: flex;
+  gap: 5px;
+  margin-top: 5px;
+}
+
+.price-inputs input {
+  flex: 1;
+  padding: 5px;
+}
+
+.apply-btn {
+  width: 100%;
+  padding: 5px;
+  margin-top: 5px;
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
