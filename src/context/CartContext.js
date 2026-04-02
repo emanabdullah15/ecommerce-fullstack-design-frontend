@@ -45,30 +45,15 @@ export const CartProvider = ({ children }) => {
     }
   };
 
-  // Place order function
   const handleCheckout = async (customerData) => {
     try {
-      if(cartItems.length === 0){
-        alert("Cart is empty");
-        return;
-      }
+      if (cartItems.length === 0) { alert("Cart is empty"); return; }
       const subtotal = cartItems.reduce((acc, item) => acc + item.price * item.qty, 0);
       const discount = subtotal > 500 ? 60 : 0;
       const tax = subtotal * 0.01;
       const total = subtotal - discount + tax;
 
-      const orderData = {
-        customer: customerData,
-        items: cartItems,
-        subtotal,
-        discount,
-        tax,
-        total,
-        status: "pending",
-      };
-
-      
-
+      const orderData = { customer: customerData, items: cartItems, subtotal, discount, tax, total, status: "pending" };
       const res = await axios.post(`${API_BASE}/api/orders`, orderData);
       alert(res.data.message || "Order placed successfully!");
       await removeAll();
@@ -78,22 +63,10 @@ export const CartProvider = ({ children }) => {
     }
   };
 
-  useEffect(() => {
-    fetchCart();
-  }, []);
+  useEffect(() => { fetchCart(); }, []);
 
   return (
-    <CartContext.Provider
-      value={{
-        cartItems,
-        cartCount,
-        fetchCart,
-        removeItem,
-        removeAll,
-        updateQty,
-        handleCheckout,
-      }}
-    >
+    <CartContext.Provider value={{ cartItems, cartCount, fetchCart, removeItem, removeAll, updateQty, handleCheckout }}>
       {children}
     </CartContext.Provider>
   );

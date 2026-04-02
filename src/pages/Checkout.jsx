@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import { CartContext } from "../context/CartContext";
 import { useNavigate } from "react-router-dom";
 
@@ -7,16 +7,9 @@ const Checkout = () => {
   const navigate = useNavigate();
 
   const [customer, setCustomer] = useState({
-    name: "",
-    email: "",
-    address: "",
-    city: "",
-    state: "",
-    zip: "",
-    paymentMethod: "cod"
+    name: "", email: "", address: "", city: "", state: "", zip: "", paymentMethod: "cod"
   });
 
-  // Totals calculation
   const subtotal = cartItems.reduce((acc, item) => acc + item.price * item.qty, 0);
   const discount = subtotal > 500 ? 60 : 0;
   const tax = subtotal * 0.01;
@@ -26,15 +19,14 @@ const Checkout = () => {
 
   const submitOrder = async (e) => {
     e.preventDefault();
-    await handleCheckout(customer); // Place order via context
-    navigate("/"); // Redirect home after order
+    await handleCheckout(customer);
+    navigate("/");
   };
 
   return (
     <div style={{ maxWidth: 600, margin: "50px auto" }}>
       <h4>Checkout</h4>
 
-      {/* Cart summary */}
       <div className="mb-3 p-3 border rounded">
         <p>Subtotal: ${subtotal.toFixed(2)}</p>
         <p>Discount: -${discount.toFixed(2)}</p>
@@ -43,7 +35,6 @@ const Checkout = () => {
         <h5>Total: ${total.toFixed(2)}</h5>
       </div>
 
-      {/* Customer form */}
       <form onSubmit={submitOrder}>
         <input name="name" placeholder="Name" onChange={handleChange} required className="form-control mb-2"/>
         <input name="email" placeholder="Email" onChange={handleChange} required className="form-control mb-2"/>

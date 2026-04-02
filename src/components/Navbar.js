@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { FaUser, FaShoppingCart, FaEnvelope, FaHeart, FaTimes, FaChevronDown } from "react-icons/fa";
+import { FaUser, FaShoppingCart, FaEnvelope, FaHeart, FaChevronDown } from "react-icons/fa";
 import { FlagIcon } from "react-flag-kit";
 
 import brandLogo from "../assets/icons/logo-colored.svg";
@@ -30,7 +30,6 @@ function Navbar() {
     { country: "GB", label: "English, GBP" },
   ];
 
-  // ✅ Functions to fix ESLint errors
   const handleProfileClick = () => setProfileOpen(true);
   const handleCartClick = () => navigate("/cart");
   const handleMessagesClick = () => navigate("/messages");
@@ -57,12 +56,10 @@ function Navbar() {
             </div>
           </div>
         </div>
-        {/* Mobile menu code unchanged */}
       </div>
 
       {/* DESKTOP NAV */}
       <div className="desktop-navbar">
-        {/* TOP */}
         <div className="top-navbar">
           <div className="container nav-flex">
             <Link to="/" className="logo">
@@ -99,7 +96,6 @@ function Navbar() {
           </div>
         </div>
 
-        {/* BOTTOM */}
         <div className="bottom-navbar">
           <div className="container nav-flex">
             <div className="menu-left">
@@ -111,9 +107,7 @@ function Navbar() {
             </div>
             <div className="menu-right">
               <div className="nav-dropdown">
-                <div onClick={() => setHelpOpen(!helpOpen)}>
-                  Help <FaChevronDown />
-                </div>
+                <div onClick={() => setHelpOpen(!helpOpen)}>Help <FaChevronDown /></div>
                 {helpOpen && (
                   <div className="dropdown-menu-custom">
                     <div>Help Center</div>
@@ -131,13 +125,7 @@ function Navbar() {
                 {langOpen && (
                   <div className="dropdown-menu-custom">
                     {languages.map((lang, i) => (
-                      <div
-                        key={i}
-                        onClick={() => {
-                          setSelectedLang(lang);
-                          setLangOpen(false);
-                        }}
-                      >
+                      <div key={i} onClick={() => { setSelectedLang(lang); setLangOpen(false); }}>
                         <FlagIcon code={lang.country} size={18} />
                         <span>{lang.label}</span>
                       </div>
