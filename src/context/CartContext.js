@@ -10,7 +10,7 @@ export const CartProvider = ({ children }) => {
 
   const fetchCart = async () => {
     try {
-      const { data } = await axios.get("${API_BASE}/api/cart");
+      const { data } = await axios.get(`${API_BASE}/api/cart`);
       setCartItems(data);
       setCartCount(data.reduce((acc, item) => acc + item.qty, 0));
     } catch (err) {
@@ -69,7 +69,7 @@ export const CartProvider = ({ children }) => {
 
       
 
-      const res = await axios.post("${API_BASE}/api/orders", orderData);
+      const res = await axios.post(`${API_BASE}/api/orders`, orderData);
       alert(res.data.message || "Order placed successfully!");
       await removeAll();
     } catch (err) {

@@ -34,7 +34,7 @@ const ProductDetails = () => {
 
   const addToCart = async () => {
     try {
-      await axios.post("${API_BASE}/api/cart", {
+      await axios.post(`${API_BASE}/api/cart`, {
         productId: product._id,
         name: product.name,
         price: product.price,
