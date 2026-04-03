@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import  { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaUser, FaShoppingCart, FaEnvelope, FaHeart, FaChevronDown } from "react-icons/fa";
 import { FlagIcon } from "react-flag-kit";
@@ -11,7 +11,7 @@ import { CartContext } from "../context/CartContext";
 
 function Navbar() {
   const navigate = useNavigate();
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [setMenuOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
   const [helpOpen, setHelpOpen] = useState(false);

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import React, { useState } from "react";
 import { FlagIcon } from "react-flag-kit";
 import "../styles/Footer.css";

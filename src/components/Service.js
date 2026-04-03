@@ -1,4 +1,4 @@
-import React from "react";
+// import React from "react";
 import { FaCog, FaShieldAlt, FaUser, FaLaptopCode  } from "react-icons/fa";
 
 import service1 from "../assets/images/services/image 108.png"; 

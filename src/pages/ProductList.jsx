@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+// import React, { useEffect, useState } from "react";
 import { fetchProducts } from "../services/productService";
 import "../styles/productList.css";
 import { FaTh, FaBars } from "react-icons/fa";

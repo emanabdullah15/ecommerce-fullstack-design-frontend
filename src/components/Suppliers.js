@@ -1,4 +1,4 @@
-import React from "react";
+// import React from "react";
 import { FlagIcon } from "react-flag-kit";
 import "../styles/Suppliers.css";
 
