@@ -2,22 +2,45 @@ import { useEffect, useState } from "react";
 import { fetchProducts } from "../services/productService";
 import "../styles/productList.css";
 import { FaTh, FaBars } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+
+const categoryFolder = {
+  "consumer-electronics": "tech",
+  "home-outdoor": "interior",
+  "recommended": "cloth",
+};
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
   const [view, setView] = useState("grid");
   const [currentPage, setCurrentPage] = useState(1);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [filters, setFilters] = useState({
     brands: [],
     features: [],
     condition: "",
+    category: "",
+    search: "",
   });
 
   const productsPerPage = 6;
 
+  // Read query params from URL
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const categoryParam = params.get("category") || "";
+    const searchParam = params.get("search") || "";
+
+    setFilters((prev) => ({
+      ...prev,
+      category: categoryParam,
+      search: searchParam,
+    }));
+  }, [location.search]);
+
+  // Fetch products whenever filters change
   useEffect(() => {
     const getProducts = async () => {
       const data = await fetchProducts(filters);
@@ -74,14 +97,26 @@ const ProductList = () => {
             <div className="mb-4">
               <h6 className="fw-bold">Category</h6>
               <ul className="list-unstyled sidebar-list">
-                <li>Mobile accessory</li>
-                <li>Electronics</li>
-                <li>Smartphones</li>
-                <li>Modern tech</li>
+                {Object.keys(categoryFolder).map((cat) => (
+                  <li
+                    key={cat}
+                    style={{ cursor: "pointer" }}
+                    className={filters.category === categoryFolder[cat] ? "text-primary" : ""}
+                    onClick={() =>
+                      setFilters((prev) => ({
+                        ...prev,
+                        category: categoryFolder[cat],
+                      }))
+                    }
+                  >
+                    {cat.replace("-", " ")}
+                  </li>
+                ))}
                 <li className="text-primary small">See all</li>
               </ul>
             </div>
 
+            {/* Brands */}
             <div className="mb-4">
               <h6 className="fw-bold">Brands</h6>
               {["Samsung", "Apple", "Huawei", "Poco", "Lenovo"].map((b) => (
@@ -96,6 +131,7 @@ const ProductList = () => {
               ))}
             </div>
 
+            {/* Features */}
             <div className="mb-4">
               <h6 className="fw-bold">Features</h6>
               {["Metallic", "Plastic cover", "8GB Ram", "Super power", "Large Memory"].map((f) => (
@@ -110,6 +146,7 @@ const ProductList = () => {
               ))}
             </div>
 
+            {/* Condition */}
             <div className="mb-4">
               <h6 className="fw-bold">Condition</h6>
               {["Any", "Refurbished", "Brand new", "Old items"].map((c) => (

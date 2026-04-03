@@ -1,4 +1,4 @@
-import  { useState, useContext } from "react";
+import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaUser, FaShoppingCart, FaEnvelope, FaHeart, FaChevronDown } from "react-icons/fa";
 import { FlagIcon } from "react-flag-kit";
@@ -8,10 +8,13 @@ import "../styles/Navbar.css";
 import ProfileSidebar from "./ProfileSidebar";
 import { AuthContext } from "../context/AuthContext";
 import { CartContext } from "../context/CartContext";
+// import API from "../api"; // your axios instance
 
 function Navbar() {
   const navigate = useNavigate();
-  const [setMenuOpen] = useState(false);
+  
+  // Mobile menu
+  const [menuOpen, setMenuOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
   const [helpOpen, setHelpOpen] = useState(false);
@@ -19,6 +22,7 @@ function Navbar() {
   const { user } = useContext(AuthContext);
   const { cartCount } = useContext(CartContext);
 
+  // Language
   const [selectedLang, setSelectedLang] = useState({
     country: "US",
     label: "English, USD",
@@ -30,10 +34,28 @@ function Navbar() {
     { country: "GB", label: "English, GBP" },
   ];
 
+  // Search state
+  const [searchText, setSearchText] = useState("");
+  const [searchCategory, setSearchCategory] = useState("All category");
+
+  const categoryFolder = {
+    "consumer-electronics": "tech",
+    "home-outdoor": "interior",
+    "recommended": "cloth",
+  };
+
   const handleProfileClick = () => setProfileOpen(true);
   const handleCartClick = () => navigate("/cart");
   const handleMessagesClick = () => navigate("/messages");
   const handleOrdersClick = () => navigate("/orders");
+
+  const handleSearch = async () => {
+    let categoryQuery = searchCategory.toLowerCase();
+    if (categoryFolder[categoryQuery]) categoryQuery = categoryFolder[categoryQuery];
+    
+    // Navigate to product list page with search params
+    navigate(`/ProductList?category=${categoryQuery}&search=${searchText}`);
+  };
 
   return (
     <>
@@ -48,7 +70,6 @@ function Navbar() {
             <div style={{ position: "relative", cursor: "pointer" }} onClick={handleCartClick}>
               <FaShoppingCart />
               {cartCount > 0 && <span className="cart-badge">{cartCount}</span>}
-              <span>Cart</span>
             </div>
             <div onClick={handleProfileClick} style={{ cursor: "pointer" }}>
               <FaUser />
@@ -56,6 +77,18 @@ function Navbar() {
             </div>
           </div>
         </div>
+
+        {/* MOBILE MENU */}
+        {menuOpen && (
+          <div className="mobile-menu">
+            <span className="close-menu" onClick={() => setMenuOpen(false)}>✕ Close</span>
+            <Link to="/menu">☰ All category</Link>
+            <Link to="/offers">Hot offers</Link>
+            <Link to="/gift">Gift boxes</Link>
+            <Link to="/projects">Projects</Link>
+            <Link to="/ProductList">Menu item</Link>
+          </div>
+        )}
       </div>
 
       {/* DESKTOP NAV */}
@@ -65,25 +98,40 @@ function Navbar() {
             <Link to="/" className="logo">
               <img src={brandLogo} alt="brand" />
             </Link>
+
+            {/* SEARCH */}
             <div className="search-container">
-              <input type="text" placeholder="Search" className="search-input" />
-              <select className="search-select">
+              <input
+                type="text"
+                placeholder="Search"
+                className="search-input"
+                value={searchText}
+                onChange={(e) => setSearchText(e.target.value)}
+              />
+              <select
+                className="search-select"
+                value={searchCategory}
+                onChange={(e) => setSearchCategory(e.target.value)}
+              >
                 <option>All category</option>
-                <option>Electronics</option>
-                <option>Clothes</option>
+                <option>Consumer-Electronics</option>
+                <option>Home-Outdoor</option>
+                <option>Recommended</option>
               </select>
-              <button className="search-btn">Search</button>
+              <button className="search-btn" onClick={handleSearch}>Search</button>
             </div>
+
+            {/* NAV ICONS */}
             <div className="nav-icons">
               <div onClick={handleProfileClick} style={{ cursor: "pointer" }}>
                 <FaUser />
                 <span>{user ? user.name : "Profile"}</span>
               </div>
-              <div onClick={handleMessagesClick}>
+              <div onClick={handleMessagesClick} style={{ cursor: "pointer" }}>
                 <FaEnvelope />
                 <span>Message</span>
               </div>
-              <div onClick={handleOrdersClick}>
+              <div onClick={handleOrdersClick} style={{ cursor: "pointer" }}>
                 <FaHeart />
                 <span>Orders</span>
               </div>
@@ -105,7 +153,9 @@ function Navbar() {
               <Link to="/projects">Projects</Link>
               <Link to="/ProductList">Menu item</Link>
             </div>
+
             <div className="menu-right">
+              {/* HELP */}
               <div className="nav-dropdown">
                 <div onClick={() => setHelpOpen(!helpOpen)}>Help <FaChevronDown /></div>
                 {helpOpen && (
@@ -116,6 +166,8 @@ function Navbar() {
                   </div>
                 )}
               </div>
+
+              {/* LANGUAGE */}
               <div className="nav-dropdown">
                 <div onClick={() => setLangOpen(!langOpen)}>
                   <FlagIcon code={selectedLang.country} size={18} />
@@ -133,6 +185,7 @@ function Navbar() {
                   </div>
                 )}
               </div>
+
               <div className="ship-to">
                 <img src="https://flagcdn.com/w40/de.png" alt="flag" />
                 <span>Ship to</span>
