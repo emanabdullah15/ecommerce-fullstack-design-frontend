@@ -1,5 +1,4 @@
-import { useState, useEffect, useCallback  } from "react";
-// import React, { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import API from "../api";
 import { useNavigate } from "react-router-dom";
 import { logoutUser } from "../services/authService";
@@ -27,7 +26,7 @@ const AdminPanel = () => {
     } catch (err) {
       console.error(err);
     }
-  },[token]);
+  }, [token]);
 
   useEffect(() => { fetchProducts(); }, [fetchProducts]);
 
@@ -86,7 +85,7 @@ const AdminPanel = () => {
   };
 
   return (
-    <div className="container mt-5">
+    <div className="container mt-3 mt-md-5">
       <h2>Admin Panel</h2>
       <p>Only admins can see this page.</p>
       <button className="btn btn-danger mb-3" onClick={handleLogout}>Logout</button>
@@ -94,52 +93,110 @@ const AdminPanel = () => {
       {/* Add/Edit Form */}
       <div className="card mb-4 p-3">
         <h4>{editingId ? "Edit Product" : "Add Product"}</h4>
-        <form onSubmit={handleSubmit} encType="multipart/form-data">
-          <input type="text" name="name" placeholder="Product Name" value={formData.name} onChange={handleChange} required className="form-control mb-2" />
-          <select name="category" value={formData.category} onChange={handleChange} required className="form-control mb-2">
-            <option value="consumer-electronics">Consumer Electronics</option>
-            <option value="home-outdoor">Home & Outdoor</option>
-            <option value="recommended">Recommended / Clothing</option>
-          </select>
-          <input type="number" name="price" placeholder="Price" value={formData.price} onChange={handleChange} required className="form-control mb-2" />
-          <input type="number" name="discount" placeholder="Discount (optional)" value={formData.discount} onChange={handleChange} className="form-control mb-2" />
-          <textarea name="description" placeholder="Description" value={formData.description} onChange={handleChange} required className="form-control mb-2" />
-          <input type="file" name="img" accept="image/*" onChange={handleChange} className="form-control mb-2" />
-          <button type="submit" className="btn btn-primary">{editingId ? "Update" : "Add"}</button>
+        <form onSubmit={handleSubmit} encType="multipart/form-data" className="row g-2">
+          <div className="col-12 col-md-6">
+            <input
+              type="text"
+              name="name"
+              placeholder="Product Name"
+              value={formData.name}
+              onChange={handleChange}
+              required
+              className="form-control"
+            />
+          </div>
+          <div className="col-12 col-md-6">
+            <select
+              name="category"
+              value={formData.category}
+              onChange={handleChange}
+              required
+              className="form-control"
+            >
+              <option value="consumer-electronics">Consumer Electronics</option>
+              <option value="home-outdoor">Home & Outdoor</option>
+              <option value="recommended">Recommended / Clothing</option>
+            </select>
+          </div>
+          <div className="col-12 col-md-4">
+            <input
+              type="number"
+              name="price"
+              placeholder="Price"
+              value={formData.price}
+              onChange={handleChange}
+              required
+              className="form-control"
+            />
+          </div>
+          <div className="col-12 col-md-4">
+            <input
+              type="number"
+              name="discount"
+              placeholder="Discount (optional)"
+              value={formData.discount}
+              onChange={handleChange}
+              className="form-control"
+            />
+          </div>
+          <div className="col-12 col-md-4">
+            <input
+              type="file"
+              name="img"
+              accept="image/*"
+              onChange={handleChange}
+              className="form-control"
+            />
+          </div>
+          <div className="col-12">
+            <textarea
+              name="description"
+              placeholder="Description"
+              value={formData.description}
+              onChange={handleChange}
+              required
+              className="form-control"
+            ></textarea>
+          </div>
+          <div className="col-12">
+            <button type="submit" className="btn btn-primary">{editingId ? "Update" : "Add"}</button>
+          </div>
         </form>
       </div>
 
       {/* Product Table */}
       <h4>Products</h4>
-      <table className="table table-bordered table-hover">
-        <thead>
-          <tr>
-            <th>Image</th>
-            <th>Name</th>
-            <th>Category</th>
-            <th>Price</th>
-            <th>Discount</th>
-            <th>Description</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {products.map((p) => (
-            <tr key={p._id}>
-              <td>{p.img ? <img src={p.img} alt={p.name} style={{ width: "80px" }} /> : "No Image"}</td>
-              <td>{p.name}</td>
-              <td>{p.category}</td>
-              <td>${p.price}</td>
-              <td>{p.discount || 0}%</td>
-              <td>{p.description}</td>
-              <td>
-                <button className="btn btn-sm btn-warning me-2 mb-1" onClick={() => handleEdit(p)}>Edit</button>
-                <button className="btn btn-sm btn-danger mb-1" onClick={() => handleDelete(p._id)}>Delete</button>
-              </td>
+      <div className="table-responsive">
+        <table className="table table-bordered table-hover">
+          <thead>
+            <tr>
+              <th>Image</th>
+              <th>Name</th>
+              <th>Category</th>
+              <th>Price</th>
+              <th>Discount</th>
+              <th>Description</th>
+              <th>Actions</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {products.map((p) => (
+              <tr key={p._id}>
+                <td>{p.img ? <img src={p.img} alt={p.name} style={{ width: "80px", maxWidth: "100%" }} /> : "No Image"}</td>
+                <td>{p.name}</td>
+                <td>{p.category}</td>
+                <td>${p.price}</td>
+                <td>{p.discount || 0}%</td>
+                <td>{p.description}</td>
+                <td>
+                  <button className="btn btn-sm btn-warning me-2 mb-1" onClick={() => handleEdit(p)}>Edit</button>
+                  <button className="btn btn-sm btn-danger mb-1" onClick={() => handleDelete(p._id)}>Delete</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };
