@@ -1,6 +1,6 @@
 import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { FaUser, FaShoppingCart, FaEnvelope, FaHeart, FaChevronDown } from "react-icons/fa";
+import { FaUser, FaShoppingCart, FaEnvelope, FaHeart, FaChevronDown, FaTimes } from "react-icons/fa";
 import { FlagIcon } from "react-flag-kit";
 
 import brandLogo from "../assets/icons/logo-colored.svg";
@@ -8,21 +8,18 @@ import "../styles/Navbar.css";
 import ProfileSidebar from "./ProfileSidebar";
 import { AuthContext } from "../context/AuthContext";
 import { CartContext } from "../context/CartContext";
-// import API from "../api"; // your axios instance
 
 function Navbar() {
   const navigate = useNavigate();
-  
-  // Mobile menu
   const [menuOpen, setMenuOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
   const [helpOpen, setHelpOpen] = useState(false);
+  const [searchInput, setSearchInput] = useState("");
 
   const { user } = useContext(AuthContext);
   const { cartCount } = useContext(CartContext);
 
-  // Language
   const [selectedLang, setSelectedLang] = useState({
     country: "US",
     label: "English, USD",
@@ -34,27 +31,14 @@ function Navbar() {
     { country: "GB", label: "English, GBP" },
   ];
 
-  // Search state
-  const [searchText, setSearchText] = useState("");
-  const [searchCategory, setSearchCategory] = useState("All category");
-
-  const categoryFolder = {
-    "consumer-electronics": "tech",
-    "home-outdoor": "interior",
-    "recommended": "cloth",
-  };
-
   const handleProfileClick = () => setProfileOpen(true);
   const handleCartClick = () => navigate("/cart");
   const handleMessagesClick = () => navigate("/messages");
   const handleOrdersClick = () => navigate("/orders");
 
-  const handleSearch = async () => {
-    let categoryQuery = searchCategory.toLowerCase();
-    if (categoryFolder[categoryQuery]) categoryQuery = categoryFolder[categoryQuery];
-    
-    // Navigate to product list page with search params
-    navigate(`/ProductList?category=${categoryQuery}&search=${searchText}`);
+  const handleSearch = (e) => {
+    e.preventDefault();
+    navigate(`/ProductList?search=${encodeURIComponent(searchInput)}`);
   };
 
   return (
@@ -73,22 +57,39 @@ function Navbar() {
             </div>
             <div onClick={handleProfileClick} style={{ cursor: "pointer" }}>
               <FaUser />
-              <span>{user ? user.name : "Profile"}</span>
             </div>
           </div>
         </div>
 
-        {/* MOBILE MENU */}
-        {menuOpen && (
-          <div className="mobile-menu">
-            <span className="close-menu" onClick={() => setMenuOpen(false)}>✕ Close</span>
-            <Link to="/menu">☰ All category</Link>
-            <Link to="/offers">Hot offers</Link>
-            <Link to="/gift">Gift boxes</Link>
-            <Link to="/projects">Projects</Link>
-            <Link to="/ProductList">Menu item</Link>
+        {/* SEARCH */}
+        <div className="mobile-search">
+          <form onSubmit={handleSearch}>
+            <input
+              type="text"
+              placeholder="Search products..."
+              value={searchInput}
+              onChange={(e) => setSearchInput(e.target.value)}
+            />
+          </form>
+        </div>
+
+        {/* MOBILE DRAWER */}
+        <div className={`mobile-drawer ${menuOpen ? "open" : ""}`}>
+          <div className="drawer-header">
+            <h5>Menu</h5>
+            <FaTimes onClick={() => setMenuOpen(false)} />
           </div>
-        )}
+          <ul>
+            <li><Link to="/menu" onClick={() => setMenuOpen(false)}>All category</Link></li>
+            <li><Link to="/offers" onClick={() => setMenuOpen(false)}>Hot offers</Link></li>
+            <li><Link to="/gift" onClick={() => setMenuOpen(false)}>Gift boxes</Link></li>
+            <li><Link to="/projects" onClick={() => setMenuOpen(false)}>Projects</Link></li>
+            <li><Link to="/ProductList" onClick={() => setMenuOpen(false)}>Menu item</Link></li>
+          </ul>
+        </div>
+
+        {/* OVERLAY */}
+        {menuOpen && <div className="overlay" onClick={() => setMenuOpen(false)}></div>}
       </div>
 
       {/* DESKTOP NAV */}
@@ -98,40 +99,31 @@ function Navbar() {
             <Link to="/" className="logo">
               <img src={brandLogo} alt="brand" />
             </Link>
-
-            {/* SEARCH */}
             <div className="search-container">
               <input
                 type="text"
                 placeholder="Search"
                 className="search-input"
-                value={searchText}
-                onChange={(e) => setSearchText(e.target.value)}
+                value={searchInput}
+                onChange={(e) => setSearchInput(e.target.value)}
               />
-              <select
-                className="search-select"
-                value={searchCategory}
-                onChange={(e) => setSearchCategory(e.target.value)}
-              >
+              <select className="search-select">
                 <option>All category</option>
-                <option>Consumer-Electronics</option>
-                <option>Home-Outdoor</option>
-                <option>Recommended</option>
+                <option>Electronics</option>
+                <option>Clothes</option>
               </select>
               <button className="search-btn" onClick={handleSearch}>Search</button>
             </div>
-
-            {/* NAV ICONS */}
             <div className="nav-icons">
               <div onClick={handleProfileClick} style={{ cursor: "pointer" }}>
                 <FaUser />
                 <span>{user ? user.name : "Profile"}</span>
               </div>
-              <div onClick={handleMessagesClick} style={{ cursor: "pointer" }}>
+              <div onClick={handleMessagesClick}>
                 <FaEnvelope />
                 <span>Message</span>
               </div>
-              <div onClick={handleOrdersClick} style={{ cursor: "pointer" }}>
+              <div onClick={handleOrdersClick}>
                 <FaHeart />
                 <span>Orders</span>
               </div>
@@ -153,9 +145,7 @@ function Navbar() {
               <Link to="/projects">Projects</Link>
               <Link to="/ProductList">Menu item</Link>
             </div>
-
             <div className="menu-right">
-              {/* HELP */}
               <div className="nav-dropdown">
                 <div onClick={() => setHelpOpen(!helpOpen)}>Help <FaChevronDown /></div>
                 {helpOpen && (
@@ -166,8 +156,6 @@ function Navbar() {
                   </div>
                 )}
               </div>
-
-              {/* LANGUAGE */}
               <div className="nav-dropdown">
                 <div onClick={() => setLangOpen(!langOpen)}>
                   <FlagIcon code={selectedLang.country} size={18} />
@@ -185,7 +173,6 @@ function Navbar() {
                   </div>
                 )}
               </div>
-
               <div className="ship-to">
                 <img src="https://flagcdn.com/w40/de.png" alt="flag" />
                 <span>Ship to</span>
