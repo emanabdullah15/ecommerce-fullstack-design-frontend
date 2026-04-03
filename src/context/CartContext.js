@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect, useCallback  } from "react";
 // import React, { createContext, useState, useEffect } from "react";
 import axios from "axios";
 
@@ -9,7 +9,7 @@ export const CartProvider = ({ children }) => {
   const [cartCount, setCartCount] = useState(0);
   const API_BASE = process.env.REACT_APP_API_URL;
 
-  const fetchCart = async () => {
+  const fetchCart = useCallback(async () => {
     try {
       const { data } = await axios.get(`${API_BASE}/api/cart`);
       setCartItems(data);
@@ -17,7 +17,7 @@ export const CartProvider = ({ children }) => {
     } catch (err) {
       console.error("Fetch cart error:", err);
     }
-  };
+  },[API_BASE]);
 
   const removeItem = async (id) => {
     try {
@@ -64,7 +64,7 @@ export const CartProvider = ({ children }) => {
     }
   };
 
-  useEffect(() => { fetchCart(); }, []);
+  useEffect(() => { fetchCart(); }, [fetchCart]);
 
   return (
     <CartContext.Provider value={{ cartItems, cartCount, fetchCart, removeItem, removeAll, updateQty, handleCheckout }}>

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback  } from "react";
 // import React, { useState, useEffect } from "react";
 import API from "../api";
 import { useNavigate } from "react-router-dom";
@@ -20,16 +20,16 @@ const AdminPanel = () => {
   const token = localStorage.getItem("userToken");
 
   // Fetch products from backend
-  const fetchProducts = async () => {
+  const fetchProducts = useCallback(async () => {
     try {
       const res = await API.get("/products", { headers: { Authorization: `Bearer ${token}` } });
       setProducts(res.data);
     } catch (err) {
       console.error(err);
     }
-  };
+  },[token]);
 
-  useEffect(() => { fetchProducts(); }, []);
+  useEffect(() => { fetchProducts(); }, [fetchProducts]);
 
   const handleLogout = () => logoutUser(navigate);
 
