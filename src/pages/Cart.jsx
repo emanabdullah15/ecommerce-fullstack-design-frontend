@@ -1,5 +1,4 @@
 import { useEffect, useState, useContext } from "react";
-// import React, { useEffect, useState, useContext } from "react";
 import { Container, Row, Col, Card, Button, Form } from "react-bootstrap";
 import { CartContext } from "../context/CartContext";
 import "../styles/cart.css";
@@ -10,7 +9,7 @@ const Cart = () => {
   const [savedItems, setSavedItems] = useState([]);
   const navigate = useNavigate();
 
-  // Fetch cart on component mount
+  // Fetch cart on mount
   useEffect(() => {
     fetchCart();
   }, [fetchCart]);
@@ -24,22 +23,20 @@ const Cart = () => {
   // Move saved item back to cart
   const moveToCart = (item) => {
     setSavedItems(savedItems.filter((i) => i._id !== item._id));
-    fetchCart(); // Refresh cart
+    fetchCart();
   };
 
-  // Calculate totals
+  // Totals
   const subtotal = cartItems.reduce((acc, item) => acc + item.price * item.qty, 0);
   const discount = subtotal > 500 ? 60 : 0;
   const tax = subtotal * 0.01;
   const total = subtotal - discount + tax;
 
-  // Checkout button click
   const handleCheckout = () => {
     if (cartItems.length === 0) {
       alert("Your cart is empty!");
       return;
     }
-    // Navigate to checkout page with cart data
     navigate("/checkout", { state: { cartItems, subtotal, discount, tax, total } });
   };
 
@@ -52,7 +49,11 @@ const Cart = () => {
             <Card key={item._id} className="cart-item mb-3 p-3">
               <Row className="align-items-center">
                 <Col md={2}>
-                  <img src={item.img} className="img-fluid rounded" alt={item.name} />
+                  <img
+                    src={item.img || "/placeholder.png"} // Cloudinary URL or fallback
+                    className="img-fluid rounded"
+                    alt={item.name}
+                  />
                 </Col>
                 <Col md={5}>
                   <h6>{item.name}</h6>
@@ -128,10 +129,7 @@ const Cart = () => {
             <h5 className="fw-bold">
               Total <span className="float-end">${total.toFixed(2)}</span>
             </h5>
-            <Button
-              className="btn btn-success w-100 mt-2"
-              onClick={handleCheckout}
-            >
+            <Button className="btn btn-success w-100 mt-2" onClick={handleCheckout}>
               Checkout
             </Button>
           </Card>
@@ -146,7 +144,11 @@ const Cart = () => {
             {savedItems.map((item) => (
               <Col md={3} key={item._id}>
                 <Card className="p-3 text-center saved-card">
-                  <img src={item.img} className="img-fluid mb-2" alt="" />
+                  <img
+                    src={item.img || "/placeholder.png"}
+                    className="img-fluid mb-2"
+                    alt={item.name}
+                  />
                   <h6>${item.price.toFixed(2)}</h6>
                   <small className="text-muted">{item.name}</small>
                   <Button
